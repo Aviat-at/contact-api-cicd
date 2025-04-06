@@ -34,15 +34,6 @@ pipeline {
       }
     }
 
-    stage('Terraform Init & Apply') {
-      steps {
-        sh '''
-        terraform init
-        terraform plan -out=tfplan
-        terraform apply -auto-approve tfplan
-        '''
-      }
-    }
 
     stage('Deploy Azure Function') {
       steps {
