@@ -35,18 +35,13 @@ pipeline {
     }
 
 
-    stage('Zip and Deploy') {
+   stage('Deploy Function') {
   steps {
     sh '''
-    # Prepare folder structure
-    mkdir -p contact-api
-    cp function_app.py contact-api/
-    touch contact-api/__init__.py
-
-    # Create deployment ZIP
+    # Create zip from existing directory structure
     zip -r app.zip contact-api/ host.json requirements.txt
 
-    # Deploy to Azure
+    # Deploy to Azure Function
     az functionapp deployment source config-zip \
       --resource-group "$TF_VAR_resource_group_name" \
       --name "$TF_VAR_function_app_name" \
@@ -54,6 +49,5 @@ pipeline {
     '''
   }
 }
-
   }
 }
