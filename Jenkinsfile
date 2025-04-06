@@ -49,5 +49,14 @@ pipeline {
     '''
   }
 }
+
+stage('Show Vars') {
+  steps {
+    sh '''
+    echo "Function App Name: $TF_VAR_function_app_name"
+    echo "Resource Group Name: $TF_VAR_resource_group_name"
+    '''
+  }
+}
   }
 }
