@@ -34,6 +34,23 @@ pipeline {
       }
     }
 
+   stage('Run Unit Tests') {
+  steps {
+    sh '''
+    echo "Running unit tests with pytest..."
+
+    # (Optional) Activate virtual environment if needed
+    # source venv/bin/activate
+
+    # Install test dependencies if not already
+    pip install -r requirements.txt
+    pip install pytest
+
+    # Run tests
+    pytest test_function_app.py
+    '''
+  }
+}
 
    stage('Deploy Function') {
   steps {
